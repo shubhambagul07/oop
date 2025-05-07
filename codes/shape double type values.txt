@@ -1,0 +1,53 @@
+// Base class
+abstract class Shape {
+    protected double dimension1;
+    protected double dimension2;
+
+    // Constructor to initialize dimensions
+    public Shape(double dimension1, double dimension2) {
+        this.dimension1 = dimension1;
+        this.dimension2 = dimension2;
+    }
+
+    // Abstract method to calculate area
+    public abstract double compute_area();
+}
+
+// Derived class for Triangle
+class Triangle extends Shape {
+    public Triangle(double base, double height) {
+        super(base, height);
+    }
+
+    // Overriding compute_area() for Triangle
+    @Override
+    public double compute_area() {
+        return 0.5 * dimension1 * dimension2; // Area = 1/2 * base * height
+    }
+}
+
+// Derived class for Rectangle
+class Rectangle extends Shape {
+    public Rectangle(double length, double breadth) {
+        super(length, breadth);
+    }
+
+    // Overriding compute_area() for Rectangle
+    @Override
+    public double compute_area() {
+        return dimension1 * dimension2; // Area = length * breadth
+    }
+}
+
+// Main class to test the program
+public class Main {
+    public static void main(String[] args) {
+        // Creating objects of Triangle and Rectangle using dynamic binding
+        Shape shape1 = new Triangle(5.0, 4.0);  // Base = 5, Height = 4
+        Shape shape2 = new Rectangle(4.0, 6.0); // Length = 4, Breadth = 6
+
+        // Displaying the areas using dynamic binding
+        System.out.println("Area of Triangle: " + shape1.compute_area());
+        System.out.println("Area of Rectangle: " + shape2.compute_area());
+    }
+}

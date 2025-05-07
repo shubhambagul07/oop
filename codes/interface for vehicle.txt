@@ -1,0 +1,121 @@
+// Interface for common vehicle functionalities
+interface Vehicle {
+    void gearChange(int gear);  // Change gear
+    void speedUp(int increment); // Speed up the vehicle
+    void applyBrakes(int decrement); // Apply brakes
+}
+
+// Bicycle class implementing the Vehicle interface
+class Bicycle implements Vehicle {
+    private int speed;
+    private int gear;
+
+    public Bicycle() {
+        speed = 0;
+        gear = 1;
+    }
+
+    @Override
+    public void gearChange(int gear) {
+        this.gear = gear;
+        System.out.println("Bicycle gear changed to: " + gear);
+    }
+
+    @Override
+    public void speedUp(int increment) {
+        speed += increment;
+        System.out.println("Bicycle speed increased to: " + speed + " km/h");
+    }
+
+    @Override
+    public void applyBrakes(int decrement) {
+        speed -= decrement;
+        if (speed < 0) speed = 0;
+        System.out.println("Bicycle speed decreased to: " + speed + " km/h");
+    }
+}
+
+// Bike class implementing the Vehicle interface
+class Bike implements Vehicle {
+    private int speed;
+    private int gear;
+
+    public Bike() {
+        speed = 0;
+        gear = 1;
+    }
+
+    @Override
+    public void gearChange(int gear) {
+        this.gear = gear;
+        System.out.println("Bike gear changed to: " + gear);
+    }
+
+    @Override
+    public void speedUp(int increment) {
+        speed += increment;
+        System.out.println("Bike speed increased to: " + speed + " km/h");
+    }
+
+    @Override
+    public void applyBrakes(int decrement) {
+        speed -= decrement;
+        if (speed < 0) speed = 0;
+        System.out.println("Bike speed decreased to: " + speed + " km/h");
+    }
+}
+
+// Car class implementing the Vehicle interface
+class Car implements Vehicle {
+    private int speed;
+    private int gear;
+
+    public Car() {
+        speed = 0;
+        gear = 1;
+    }
+
+    @Override
+    public void gearChange(int gear) {
+        this.gear = gear;
+        System.out.println("Car gear changed to: " + gear);
+    }
+
+    @Override
+    public void speedUp(int increment) {
+        speed += increment;
+        System.out.println("Car speed increased to: " + speed + " km/h");
+    }
+
+    @Override
+    public void applyBrakes(int decrement) {
+        speed -= decrement;
+        if (speed < 0) speed = 0;
+        System.out.println("Car speed decreased to: " + speed + " km/h");
+    }
+}
+
+// Main class to test the implementation
+public class Main {
+    public static void main(String[] args) {
+        // Create instances of Bicycle, Bike, and Car
+        Vehicle bicycle = new Bicycle();
+        Vehicle bike = new Bike();
+        Vehicle car = new Car();
+
+        // Testing the functionalities for Bicycle
+        bicycle.gearChange(3);
+        bicycle.speedUp(15);
+        bicycle.applyBrakes(5);
+
+        // Testing the functionalities for Bike
+        bike.gearChange(4);
+        bike.speedUp(30);
+        bike.applyBrakes(10);
+
+        // Testing the functionalities for Car
+        car.gearChange(5);
+        car.speedUp(50);
+        car.applyBrakes(20);
+    }
+}

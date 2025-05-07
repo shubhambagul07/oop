@@ -1,0 +1,108 @@
+car.java 
+public abstract class Car {
+    // Common steps to build a car
+    public void buildCar() {
+        allocateAccessories();
+        assembleParts();
+        doFinalMakeup();
+    }
+
+    protected abstract void allocateAccessories();
+    protected abstract void assembleParts();
+    protected abstract void doFinalMakeup();
+}
+
+
+
+Hatchback.java
+public class Hatchback extends Car {
+    @Override
+    protected void allocateAccessories() {
+        System.out.println("Allocating accessories for Hatchback: Seats, Mirrors, Wheels");
+    }
+
+    @Override
+    protected void assembleParts() {
+        System.out.println("Assembling parts for Hatchback: Engine, Body, Frame");
+    }
+
+    @Override
+    protected void doFinalMakeup() {
+        System.out.println("Doing final makeup for Hatchback: Paint, Interior, Testing");
+    }
+}
+
+Sedan.java
+public class Sedan extends Car {
+    @Override
+    protected void allocateAccessories() {
+        System.out.println("Allocating accessories for Sedan: Leather seats, Sunroof, Wheels");
+    }
+
+    @Override
+    protected void assembleParts() {
+        System.out.println("Assembling parts for Sedan: Engine, Body, Frame");
+    }
+
+    @Override
+    protected void doFinalMakeup() {
+        System.out.println("Doing final makeup for Sedan: Paint, Interior, Testing");
+    }
+}
+
+
+SUV.java
+public class SUV extends Car {
+    @Override
+    protected void allocateAccessories() {
+        System.out.println("Allocating accessories for SUV: Leather seats, Roof racks, Alloy wheels");
+    }
+
+    @Override
+    protected void assembleParts() {
+        System.out.println("Assembling parts for SUV: Engine, Body, Frame, Off-road tires");
+    }
+
+    @Override
+    protected void doFinalMakeup() {
+        System.out.println("Doing final makeup for SUV: Paint, Interior, Testing");
+    }
+}
+
+CarFactory.java
+public class CarFactory {
+    // Factory method to create different car types
+    public static Car createCar(String carType) {
+        if (carType == null) {
+            return null;
+        }
+        if (carType.equalsIgnoreCase("Hatchback")) {
+            return new Hatchback();
+        } else if (carType.equalsIgnoreCase("Sedan")) {
+            return new Sedan();
+        } else if (carType.equalsIgnoreCase("SUV")) {
+            return new SUV();
+        }
+        return null;
+    }
+}
+
+6. TestFactoryPattern.java 
+public class TestFactoryPattern {
+    public static void main(String[] args) {
+        // Creating a Hatchback
+        System.out.println("Building a Hatchback Car:");
+        Car hatchback = CarFactory.createCar("Hatchback");
+        hatchback.buildCar();
+
+        System.out.println("\nBuilding a Sedan Car:");
+        // Creating a Sedan
+        Car sedan = CarFactory.createCar("Sedan");
+        sedan.buildCar();
+
+        System.out.println("\nBuilding an SUV Car:");
+        // Creating an SUV
+        Car suv = CarFactory.createCar("SUV");
+        suv.buildCar();
+    }
+}

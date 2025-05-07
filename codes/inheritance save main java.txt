@@ -1,0 +1,137 @@
+package employee;
+
+import java.util.Scanner;
+
+class Employee {
+    String empName, empId, address, mailId, mobileNo;
+
+    public void getDetails() {
+        Scanner sc = new Scanner(System.in);
+        System.out.print("Enter Employee Name: ");
+        empName = sc.nextLine();
+        System.out.print("Enter Employee ID: ");
+        empId = sc.nextLine();
+        System.out.print("Enter Address: ");
+        address = sc.nextLine();
+        System.out.print("Enter Mail ID: ");
+        mailId = sc.nextLine();
+        System.out.print("Enter Mobile Number: ");
+        mobileNo = sc.nextLine();
+    }
+
+    public void displayDetails() {
+        System.out.println("\nEmployee Name: " + empName);
+        System.out.println("Employee ID: " + empId);
+        System.out.println("Address: " + address);
+        System.out.println("Mail ID: " + mailId);
+        System.out.println("Mobile No: " + mobileNo);
+    }
+}
+
+class Salary extends Employee {
+    double basicPay, DA, HRA, PF, clubFund, grossSalary, netSalary;
+
+    public void getBasicPay() {
+        Scanner sc = new Scanner(System.in);
+        System.out.print("Enter Basic Pay: ");
+        basicPay = sc.nextDouble();
+    }
+
+    public void calculateSalary() {
+        DA = 0.97 * basicPay;
+        HRA = 0.10 * basicPay;
+        PF = 0.12 * basicPay;
+        clubFund = 0.001 * basicPay;
+        grossSalary = basicPay + DA + HRA;
+        netSalary = grossSalary - (PF + clubFund);
+    }
+
+    public void generatePaySlip(String designation) {
+        System.out.println("\n------ PAY SLIP (" + designation + ") ------");
+        displayDetails();
+        System.out.println("Basic Pay: ₹" + basicPay);
+        System.out.println("DA (97%): ₹" + DA);
+        System.out.println("HRA (10%): ₹" + HRA);
+        System.out.println("PF (12%): ₹" + PF);
+        System.out.println("Staff Club Fund (0.1%): ₹" + clubFund);
+        System.out.println("Gross Salary: ₹" + grossSalary);
+        System.out.println("Net Salary: ₹" + netSalary);
+        System.out.println("-----------------------------------\n");
+    }
+}
+
+class Programmer extends Salary {
+    void process() {
+        System.out.println("\n--- Enter Programmer Details ---");
+        getDetails();
+        getBasicPay();
+        calculateSalary();
+        generatePaySlip("Programmer");
+    }
+}
+
+class TeamLead extends Salary {
+    void process() {
+        System.out.println("\n--- Enter Team Lead Details ---");
+        getDetails();
+        getBasicPay();
+        calculateSalary();
+        generatePaySlip("Team Lead");
+    }
+}
+
+class AssistantProjectManager extends Salary {
+    void process() {
+        System.out.println("\n--- Enter Assistant Project Manager Details ---");
+        getDetails();
+        getBasicPay();
+        calculateSalary();
+        generatePaySlip("Assistant Project Manager");
+    }
+}
+
+class ProjectManager extends Salary {
+    void process() {
+        System.out.println("\n--- Enter Project Manager Details ---");
+        getDetails();
+        getBasicPay();
+        calculateSalary();
+        generatePaySlip("Project Manager");
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        while (true) {
+            System.out.println("Choose Role to Generate Payslip:");
+            System.out.println("1. Programmer");
+            System.out.println("2. Team Lead");
+            System.out.println("3. Assistant Project Manager");
+            System.out.println("4. Project Manager");
+            System.out.println("5. Exit");
+            System.out.print("Enter choice: ");
+            int choice = sc.nextInt();
+
+            switch (choice) {
+                case 1:
+                    new Programmer().process();
+                    break;
+                case 2:
+                    new TeamLead().process();
+                    break;
+                case 3:
+                    new AssistantProjectManager().process();
+                    break;
+                case 4:
+                    new ProjectManager().process();
+                    break;
+                case 5:
+                    System.out.println("Exiting program.");
+                    System.exit(0);
+                default:
+                    System.out.println("Invalid choice.");
+            }
+        }
+    }
+}

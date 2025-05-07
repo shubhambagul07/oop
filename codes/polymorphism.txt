@@ -1,0 +1,75 @@
+Publication.java
+public class Publication {
+    protected String title;
+    protected double price;
+    protected int copies;
+
+    public void setData(String title, double price) {
+        this.title = title;
+        this.price = price;
+    }
+
+    public void saleCopy(int qty) {
+        copies += qty;
+        double saleAmount = qty * price;
+        System.out.println("Sold " + qty + " copies of \"" + title + "\". Total sale: ₹" + saleAmount);
+    }
+
+    public double getTotalSale() {
+        return copies * price;
+    }
+}
+
+
+Book.java
+public class Book extends Publication {
+    private String author;
+
+    public void setBookDetails(String title, double price, String author) {
+        setData(title, price);
+        this.author = author;
+    }
+
+    public void orderCopies(int qty) {
+        saleCopy(qty);
+    }
+}
+
+Magazine.java
+public class Magazine extends Publication {
+    private String currentIssue;
+
+    public void setMagazineDetails(String title, double price, String issue) {
+        setData(title, price);
+        this.currentIssue = issue;
+    }
+
+    public void orderQty(int qty) {
+        saleCopy(qty);
+    }
+
+    public void receiveIssue(String issue) {
+        this.currentIssue = issue;
+        System.out.println("Received new issue: " + currentIssue);
+    }
+}
+
+Main.java
+public class Main {
+    public static void main(String[] args) {
+        // Book
+        Book b1 = new Book();
+        b1.setBookDetails("Java Programming", 450, "John Smith");
+        b1.orderCopies(10);
+
+        // Magazine
+        Magazine m1 = new Magazine();
+        m1.setMagazineDetails("Tech Monthly", 80, "May 2025");
+        m1.orderQty(25);
+        m1.receiveIssue("June 2025");
+
+        // Total sale calculation
+        double totalSale = b1.getTotalSale() + m1.getTotalSale();
+        System.out.println("Total sale of all publications: ₹" + totalSale);
+    }
+}

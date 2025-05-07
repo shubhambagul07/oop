@@ -1,0 +1,63 @@
+import java.util.*;
+
+public class PropertyCount {
+    
+    // Generic method to count elements that satisfy a given property
+    public static <T> int countProperty(Collection<T> collection, Property<T> property) {
+        int count = 0;
+        for (T element : collection) {
+            if (property.test(element)) {
+                count++;
+            }
+        }
+        return count;
+    }
+    
+    // Interface for defining a property to test on elements
+    interface Property<T> {
+        boolean test(T element);
+    }
+    
+    public static void main(String[] args) {
+        // Sample list of integers
+        List<Integer> numbers = Arrays.asList(121, 23, 56, 17, 18, 11, 29, 30, 35);
+        
+        // Counting even numbers
+        int evenCount = countProperty(numbers, num -> num % 2 == 0);
+        System.out.println("Even numbers count: " + evenCount);
+
+        // Counting odd numbers
+        int oddCount = countProperty(numbers, num -> num % 2 != 0);
+        System.out.println("Odd numbers count: " + oddCount);
+        
+        // Counting prime numbers
+        int primeCount = countProperty(numbers, num -> isPrime(num));
+        System.out.println("Prime numbers count: " + primeCount);
+        
+        // Counting palindrome numbers
+        int palindromeCount = countProperty(numbers, num -> isPalindrome(num));
+        System.out.println("Palindrome numbers count: " + palindromeCount);
+    }
+    
+    // Method to check if a number is prime
+    public static boolean isPrime(int num) {
+        if (num <= 1) return false;
+        for (int i = 2; i * i <= num; i++) {
+            if (num % i == 0) return false;
+        }
+        return true;
+    }
+
+    // Method to check if a number is a palindrome
+    public static boolean isPalindrome(int num) {
+        int original = num;
+        int reversed = 0;
+        
+        while (num > 0) {
+            reversed = reversed * 10 + num % 10;
+            num /= 10;
+        }
+        
+        return original == reversed;
+    }
+}
