@@ -1,0 +1,131 @@
+Let's break down the **PropertyCount** program in an easy-to-understand way:
+
+### **1. The Generic Method**
+
+```java
+public static <T> int countProperty(Collection<T> collection, Property<T> property) {
+    int count = 0;
+    for (T element : collection) {
+        if (property.test(element)) {
+            count++;
+        }
+    }
+    return count;
+}
+```
+
+* **`countProperty`** is a **generic method** that works with any type of object (denoted by `<T>`). It accepts:
+
+  * A **collection** (like a list of numbers, strings, etc.).
+  * A **property** (a condition) that tests each element in the collection.
+* Inside the method:
+
+  * It loops through each element in the collection.
+  * It checks if the element satisfies the condition (`property.test(element)`).
+  * If it does, it increases the **count**.
+* The method returns the total count of elements that satisfy the given condition.
+
+### **2. The Property Interface**
+
+```java
+interface Property<T> {
+    boolean test(T element);
+}
+```
+
+* This **interface** defines a contract for a property that can be tested on elements of type `T`. The `test` method takes an element and returns a boolean (`true` or `false`), indicating whether the element satisfies the property.
+
+### **3. Main Method: Using the Generic Method**
+
+```java
+public static void main(String[] args) {
+    List<Integer> numbers = Arrays.asList(121, 23, 56, 17, 18, 11, 29, 30, 35);
+    
+    int evenCount = countProperty(numbers, num -> num % 2 == 0);
+    System.out.println("Even numbers count: " + evenCount);
+
+    int oddCount = countProperty(numbers, num -> num % 2 != 0);
+    System.out.println("Odd numbers count: " + oddCount);
+    
+    int primeCount = countProperty(numbers, num -> isPrime(num));
+    System.out.println("Prime numbers count: " + primeCount);
+    
+    int palindromeCount = countProperty(numbers, num -> isPalindrome(num));
+    System.out.println("Palindrome numbers count: " + palindromeCount);
+}
+```
+
+* In the `main` method:
+
+  * **`numbers`** is a list of integers.
+  * The `countProperty` method is called multiple times, each with a different **property**.
+
+    * **Even numbers**: `num -> num % 2 == 0` checks if the number is divisible by 2.
+    * **Odd numbers**: `num -> num % 2 != 0` checks if the number is not divisible by 2.
+    * **Prime numbers**: `num -> isPrime(num)` uses the `isPrime` method to check if the number is prime.
+    * **Palindrome numbers**: `num -> isPalindrome(num)` uses the `isPalindrome` method to check if the number is the same forward and backward.
+
+### **4. The `isPrime` Method**
+
+```java
+public static boolean isPrime(int num) {
+    if (num <= 1) return false;
+    for (int i = 2; i * i <= num; i++) {
+        if (num % i == 0) return false;
+    }
+    return true;
+}
+```
+
+* This method checks if a number is **prime**:
+
+  * Numbers less than or equal to 1 are not prime.
+  * It tries to divide the number by integers from 2 to its square root. If it finds a divisor, it returns `false`, meaning the number is not prime.
+  * If no divisors are found, it returns `true`, meaning the number is prime.
+
+### **5. The `isPalindrome` Method**
+
+```java
+public static boolean isPalindrome(int num) {
+    int original = num;
+    int reversed = 0;
+    
+    while (num > 0) {
+        reversed = reversed * 10 + num % 10;
+        num /= 10;
+    }
+    
+    return original == reversed;
+}
+```
+
+* This method checks if a number is a **palindrome**:
+
+  * It reverses the digits of the number.
+  * If the original number equals the reversed number, it's a palindrome, and it returns `true`. Otherwise, it returns `false`.
+
+### **6. Output**
+
+* For the list of numbers `[121, 23, 56, 17, 18, 11, 29, 30, 35]`, the program will count:
+
+  * **Even numbers** (divisible by 2).
+  * **Odd numbers** (not divisible by 2).
+  * **Prime numbers** (numbers with only 1 and themselves as divisors).
+  * **Palindrome numbers** (numbers that read the same forwards and backwards).
+* The output will be something like:
+
+```
+Even numbers count: 3
+Odd numbers count: 6
+Prime numbers count: 4
+Palindrome numbers count: 2
+```
+
+### **Summary of the Program**
+
+* **Generic Method**: `countProperty` counts the number of elements in a collection that satisfy a given property.
+* **Property Interface**: Defines the contract for testing elements.
+* **Lambda Expressions**: Used to define properties like even, odd, prime, and palindrome numbers.
+* **Reusable**: The code is flexible and can be used for different types of collections and properties.
+
+It demonstrates how to use **generics**, **interfaces**, and **lambda expressions** together to perform operations on collections in a clean and reusable way.

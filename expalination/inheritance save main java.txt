@@ -1,0 +1,369 @@
+Here’s a line-by-line explanation of the code provided:
+
+### **Employee.java** (Base class for employee details)
+
+```java
+package employee;
+```
+
+* The code is in the `employee` package. This helps organize classes that belong to the same functionality or group.
+
+```java
+import java.util.Scanner;
+```
+
+* This imports the `Scanner` class, which is used to take user input from the console.
+
+```java
+class Employee {
+```
+
+* Declares the `Employee` class, which will hold common attributes for an employee.
+
+```java
+    String empName, empId, address, mailId, mobileNo;
+```
+
+* Declares instance variables to store the employee’s details: name, ID, address, email ID, and mobile number.
+
+```java
+    public void getDetails() {
+```
+
+* Defines a method `getDetails` that asks the user to input the employee's personal information.
+
+```java
+        Scanner sc = new Scanner(System.in);
+```
+
+* Creates a `Scanner` object to read input from the user.
+
+```java
+        System.out.print("Enter Employee Name: ");
+        empName = sc.nextLine();
+```
+
+* Prompts the user to enter the employee's name, then stores it in `empName`.
+
+```java
+        System.out.print("Enter Employee ID: ");
+        empId = sc.nextLine();
+```
+
+* Prompts the user to enter the employee's ID, then stores it in `empId`.
+
+```java
+        System.out.print("Enter Address: ");
+        address = sc.nextLine();
+```
+
+* Prompts the user to enter the employee's address, then stores it in `address`.
+
+```java
+        System.out.print("Enter Mail ID: ");
+        mailId = sc.nextLine();
+```
+
+* Prompts the user to enter the employee's email ID, then stores it in `mailId`.
+
+```java
+        System.out.print("Enter Mobile Number: ");
+        mobileNo = sc.nextLine();
+```
+
+* Prompts the user to enter the employee's mobile number, then stores it in `mobileNo`.
+
+```java
+    }
+```
+
+* Closes the `getDetails` method.
+
+```java
+    public void displayDetails() {
+```
+
+* Defines a method `displayDetails` to print the employee's details.
+
+```java
+        System.out.println("\nEmployee Name: " + empName);
+        System.out.println("Employee ID: " + empId);
+        System.out.println("Address: " + address);
+        System.out.println("Mail ID: " + mailId);
+        System.out.println("Mobile No: " + mobileNo);
+```
+
+* Prints the employee's details: name, ID, address, email, and mobile number.
+
+```java
+    }
+```
+
+* Closes the `displayDetails` method.
+
+```java
+}
+```
+
+* Closes the `Employee` class.
+
+---
+
+### **Salary.java** (Inherits from `Employee`, calculates and generates pay slip)
+
+```java
+class Salary extends Employee {
+```
+
+* Declares the `Salary` class, which extends the `Employee` class. This means `Salary` inherits all the attributes and methods of `Employee`.
+
+```java
+    double basicPay, DA, HRA, PF, clubFund, grossSalary, netSalary;
+```
+
+* Declares instance variables to store salary-related information: basic pay, Dearness Allowance (DA), House Rent Allowance (HRA), Provident Fund (PF), club fund, gross salary, and net salary.
+
+```java
+    public void getBasicPay() {
+```
+
+* Defines a method `getBasicPay` to take input for the basic pay of the employee.
+
+```java
+        Scanner sc = new Scanner(System.in);
+        System.out.print("Enter Basic Pay: ");
+        basicPay = sc.nextDouble();
+```
+
+* Prompts the user to enter the employee's basic pay, then stores it in `basicPay`.
+
+```java
+    }
+```
+
+* Closes the `getBasicPay` method.
+
+```java
+    public void calculateSalary() {
+```
+
+* Defines a method `calculateSalary` that calculates the allowances, gross salary, and net salary based on the basic pay.
+
+```java
+        DA = 0.97 * basicPay;
+        HRA = 0.10 * basicPay;
+        PF = 0.12 * basicPay;
+        clubFund = 0.001 * basicPay;
+```
+
+* Calculates the various allowances based on the basic pay:
+
+  * `DA` is 97% of the basic pay.
+  * `HRA` is 10% of the basic pay.
+  * `PF` is 12% of the basic pay.
+  * `clubFund` is 0.1% of the basic pay.
+
+```java
+        grossSalary = basicPay + DA + HRA;
+        netSalary = grossSalary - (PF + clubFund);
+```
+
+* Calculates the gross salary (basic pay + DA + HRA) and the net salary (gross salary - PF - club fund).
+
+```java
+    }
+```
+
+* Closes the `calculateSalary` method.
+
+```java
+    public void generatePaySlip(String designation) {
+```
+
+* Defines a method `generatePaySlip` to generate the employee’s pay slip.
+
+```java
+        System.out.println("\n------ PAY SLIP (" + designation + ") ------");
+        displayDetails();
+```
+
+* Prints a heading for the pay slip with the employee's designation and displays the employee's details using `displayDetails()`.
+
+```java
+        System.out.println("Basic Pay: ₹" + basicPay);
+        System.out.println("DA (97%): ₹" + DA);
+        System.out.println("HRA (10%): ₹" + HRA);
+        System.out.println("PF (12%): ₹" + PF);
+        System.out.println("Staff Club Fund (0.1%): ₹" + clubFund);
+        System.out.println("Gross Salary: ₹" + grossSalary);
+        System.out.println("Net Salary: ₹" + netSalary);
+```
+
+* Prints the detailed breakdown of the salary, including basic pay, allowances, gross salary, and net salary.
+
+```java
+        System.out.println("-----------------------------------\n");
+    }
+```
+
+* Prints a separator line to finish the pay slip.
+
+```java
+}
+```
+
+* Closes the `Salary` class.
+
+---
+
+### **Programmer.java, TeamLead.java, AssistantProjectManager.java, ProjectManager.java** (Specific roles with `process` method)
+
+```java
+class Programmer extends Salary {
+```
+
+* Declares the `Programmer` class, which extends `Salary`.
+
+```java
+    void process() {
+```
+
+* Defines the `process` method, which gathers the details of the employee, calculates the salary, and generates the pay slip.
+
+```java
+        System.out.println("\n--- Enter Programmer Details ---");
+        getDetails();
+        getBasicPay();
+        calculateSalary();
+        generatePaySlip("Programmer");
+```
+
+* Prompts the user to enter the details of the programmer, gets the basic pay, calculates the salary, and generates the pay slip for the programmer.
+
+```java
+    }
+```
+
+* Closes the `process` method.
+
+```java
+}
+```
+
+* Closes the `Programmer` class.
+
+(Similar code structure applies for `TeamLead`, `AssistantProjectManager`, and `ProjectManager` classes, with each class processing a different role.)
+
+---
+
+### **Main.java** (The main entry point for the program)
+
+```java
+public class Main {
+    public static void main(String[] args) {
+```
+
+* The `Main` class is the entry point of the program. The `main` method is where the program starts execution.
+
+```java
+        Scanner sc = new Scanner(System.in);
+```
+
+* Creates a `Scanner` object to take user input.
+
+```java
+        while (true) {
+```
+
+* Starts an infinite loop to keep the program running until the user chooses to exit.
+
+```java
+            System.out.println("Choose Role to Generate Payslip:");
+            System.out.println("1. Programmer");
+            System.out.println("2. Team Lead");
+            System.out.println("3. Assistant Project Manager");
+            System.out.println("4. Project Manager");
+            System.out.println("5. Exit");
+            System.out.print("Enter choice: ");
+```
+
+* Displays the menu to the user and prompts them to select a role to generate a payslip or exit the program.
+
+```java
+            int choice = sc.nextInt();
+```
+
+* Reads the user's choice.
+
+```java
+            switch (choice) {
+```
+
+* Starts a switch case to handle different choices.
+
+```java
+                case 1:
+                    new Programmer().process();
+                    break;
+```
+
+* If the user chooses "1", creates a new `Programmer` object and calls the `process` method to generate the pay slip.
+
+```java
+                case 2:
+                    new TeamLead().process();
+                    break;
+```
+
+* If the user chooses "2", creates a new `TeamLead` object and calls the `process` method.
+
+```java
+                case 3:
+                    new AssistantProjectManager().process();
+                    break;
+```
+
+* If the user chooses "3", creates a new `AssistantProjectManager` object and calls the `process` method.
+
+```java
+                case 4:
+                    new ProjectManager().process();
+                    break;
+```
+
+* If the user chooses "4", creates a new `ProjectManager` object and calls the `process` method.
+
+```java
+                case 5:
+                    System.out.println("Exiting program.");
+                    System.exit(0);
+```
+
+* If the user chooses "5", the program exits with a message.
+
+```java
+                default:
+                    System.out.println("Invalid choice.");
+            }
+```
+
+* If the user enters an invalid choice, an error message is displayed.
+
+```java
+        }
+    }
+}
+```
+
+* Closes the infinite loop and the `main` method.
+
+---
+
+### Summary:
+
+* **`Employee`** handles employee details input and display.
+* **`Salary`** calculates salary components and generates pay slips.
+* **`Programmer`, `TeamLead`, `AssistantProjectManager`, `ProjectManager`** are specific roles that process details for each role.
+* **`Main`** provides a menu for the user to generate pay slips for different roles or exit the program.
+
+This structure uses inheritance and polymorphism to reuse common code and customize behavior for different employee roles.

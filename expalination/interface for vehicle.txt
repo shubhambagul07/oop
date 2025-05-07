@@ -1,0 +1,211 @@
+Let’s break down the code step by step in simple terms:
+
+### **1. Vehicle Interface**
+
+```java
+interface Vehicle {
+    void gearChange(int gear);  // Change gear
+    void speedUp(int increment); // Speed up the vehicle
+    void applyBrakes(int decrement); // Apply brakes
+}
+```
+
+* **`Vehicle`** is an **interface** that declares common behaviors (methods) that all types of vehicles should implement.
+
+  * `gearChange(int gear)`: Method to change the gear of the vehicle.
+  * `speedUp(int increment)`: Method to increase the vehicle's speed.
+  * `applyBrakes(int decrement)`: Method to decrease the vehicle's speed.
+
+### **2. Bicycle Class**
+
+```java
+class Bicycle implements Vehicle {
+    private int speed;
+    private int gear;
+```
+
+* `Bicycle` is a **class** that **implements** the `Vehicle` interface, which means it must provide definitions for all the methods declared in `Vehicle`.
+* It has two **private variables**: `speed` (the speed of the bicycle) and `gear` (the gear of the bicycle).
+
+```java
+    public Bicycle() {
+        speed = 0;
+        gear = 1;
+    }
+```
+
+* The constructor **`Bicycle()`** initializes the bicycle's speed to 0 and the gear to 1 when a new `Bicycle` object is created.
+
+```java
+    @Override
+    public void gearChange(int gear) {
+        this.gear = gear;
+        System.out.println("Bicycle gear changed to: " + gear);
+    }
+```
+
+* **`gearChange(int gear)`**: This method sets the bicycle’s gear to the provided value and prints a message showing the new gear.
+
+```java
+    @Override
+    public void speedUp(int increment) {
+        speed += increment;
+        System.out.println("Bicycle speed increased to: " + speed + " km/h");
+    }
+```
+
+* **`speedUp(int increment)`**: This method increases the bicycle's speed by the given increment and prints the new speed.
+
+```java
+    @Override
+    public void applyBrakes(int decrement) {
+        speed -= decrement;
+        if (speed < 0) speed = 0;
+        System.out.println("Bicycle speed decreased to: " + speed + " km/h");
+    }
+}
+```
+
+* **`applyBrakes(int decrement)`**: This method decreases the bicycle's speed by the given decrement. If the speed goes below 0, it sets the speed to 0. It then prints the new speed.
+
+### **3. Bike Class**
+
+```java
+class Bike implements Vehicle {
+    private int speed;
+    private int gear;
+```
+
+* The `Bike` class also **implements** the `Vehicle` interface, so it must provide the same methods (`gearChange`, `speedUp`, `applyBrakes`) but with its own implementation.
+
+```java
+    public Bike() {
+        speed = 0;
+        gear = 1;
+    }
+```
+
+* The constructor **`Bike()`** initializes the bike’s speed to 0 and gear to 1.
+
+```java
+    @Override
+    public void gearChange(int gear) {
+        this.gear = gear;
+        System.out.println("Bike gear changed to: " + gear);
+    }
+
+    @Override
+    public void speedUp(int increment) {
+        speed += increment;
+        System.out.println("Bike speed increased to: " + speed + " km/h");
+    }
+
+    @Override
+    public void applyBrakes(int decrement) {
+        speed -= decrement;
+        if (speed < 0) speed = 0;
+        System.out.println("Bike speed decreased to: " + speed + " km/h");
+    }
+}
+```
+
+* These methods work exactly the same as for the `Bicycle`, changing the gear, increasing the speed, and applying brakes to decrease the speed.
+
+### **4. Car Class**
+
+```java
+class Car implements Vehicle {
+    private int speed;
+    private int gear;
+```
+
+* The `Car` class is another implementation of the `Vehicle` interface with its own versions of the methods.
+
+```java
+    public Car() {
+        speed = 0;
+        gear = 1;
+    }
+```
+
+* The constructor **`Car()`** initializes the car's speed to 0 and gear to 1.
+
+```java
+    @Override
+    public void gearChange(int gear) {
+        this.gear = gear;
+        System.out.println("Car gear changed to: " + gear);
+    }
+
+    @Override
+    public void speedUp(int increment) {
+        speed += increment;
+        System.out.println("Car speed increased to: " + speed + " km/h");
+    }
+
+    @Override
+    public void applyBrakes(int decrement) {
+        speed -= decrement;
+        if (speed < 0) speed = 0;
+        System.out.println("Car speed decreased to: " + speed + " km/h");
+    }
+}
+```
+
+* Just like the `Bicycle` and `Bike`, these methods modify the speed and gear for the `Car` object.
+
+### **5. Main Class**
+
+```java
+public class Main {
+    public static void main(String[] args) {
+        Vehicle bicycle = new Bicycle();
+        Vehicle bike = new Bike();
+        Vehicle car = new Car();
+```
+
+* This is the **`Main`** class, where the program starts.
+* It creates three objects:
+
+  * `bicycle`: A `Bicycle` object.
+  * `bike`: A `Bike` object.
+  * `car`: A `Car` object.
+* All three objects are created using the `Vehicle` interface as their reference type. This is **polymorphism**: the same reference type (`Vehicle`) can hold objects of different types (e.g., `Bicycle`, `Bike`, `Car`).
+
+```java
+        bicycle.gearChange(3);
+        bicycle.speedUp(15);
+        bicycle.applyBrakes(5);
+```
+
+* These lines **test the functionality of the bicycle**:
+
+  * Change the gear to 3.
+  * Increase speed by 15 km/h.
+  * Apply brakes to decrease speed by 5 km/h.
+
+```java
+        bike.gearChange(4);
+        bike.speedUp(30);
+        bike.applyBrakes(10);
+```
+
+* These lines **test the functionality of the bike** with similar operations as for the bicycle.
+
+```java
+        car.gearChange(5);
+        car.speedUp(50);
+        car.applyBrakes(20);
+    }
+}
+```
+
+* These lines **test the functionality of the car** with similar operations as for the bicycle and bike.
+
+### **Summary**
+
+* **`Vehicle` Interface**: Defines methods that all vehicles must implement.
+* **`Bicycle`, `Bike`, and `Car`**: Classes that implement the `Vehicle` interface and provide specific functionality for changing gears, speeding up, and applying brakes.
+* **`Main` Class**: Creates instances of the `Bicycle`, `Bike`, and `Car`, and demonstrates the use of the methods defined in the `Vehicle` interface.
+
+This demonstrates **interface implementation**, **polymorphism**, and **method overriding** in Java.

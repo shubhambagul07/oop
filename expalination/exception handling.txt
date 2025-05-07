@@ -1,0 +1,116 @@
+Let’s break down the code to understand **exception handling** in simple terms.
+
+### **1. Scanner for User Input**
+
+```java
+Scanner scanner = new Scanner(System.in);
+```
+
+* A **`Scanner`** object is created to take user input from the console.
+
+### **2. try Block**
+
+```java
+try {
+    // User input for two numbers
+    System.out.print("Enter first number (Num1): ");
+    String num1Input = scanner.nextLine();
+    System.out.print("Enter second number (Num2): ");
+    String num2Input = scanner.nextLine();
+
+    // Try to parse the input to integers
+    int num1 = Integer.parseInt(num1Input);
+    int num2 = Integer.parseInt(num2Input);
+
+    // Attempt to perform division
+    if (num2 == 0) {
+        throw new ArithmeticException("Cannot divide by zero.");
+    }
+
+    // Display result of division
+    int result = num1 / num2;
+    System.out.println("Result of division: " + result);
+}
+```
+
+* The **`try` block** contains code that might throw exceptions during execution:
+
+  * It prompts the user to input two numbers.
+  * It then **parses** the input strings to integers using `Integer.parseInt()`.
+  * The code tries to **divide** the first number by the second.
+  * If the second number is **zero**, an `ArithmeticException` is **manually thrown** (because dividing by zero is not allowed in mathematics).
+
+### **3. catch Blocks (Exception Handling)**
+
+```java
+} catch (NumberFormatException e) {
+    System.out.println("Error: Invalid input. Please enter valid integers.");
+}
+```
+
+* **`catch (NumberFormatException e)`**: If the user enters a value that **cannot be parsed** into an integer (e.g., letters or special characters), a **`NumberFormatException`** will be thrown, and this catch block will handle it by displaying a user-friendly error message.
+
+```java
+} catch (ArithmeticException e) {
+    System.out.println("Error: " + e.getMessage());
+}
+```
+
+* **`catch (ArithmeticException e)`**: If the second number is zero, an **`ArithmeticException`** will be thrown, and this block will handle it by printing the exception’s message (`"Cannot divide by zero."`).
+
+```java
+} catch (ArrayIndexOutOfBoundsException e) {
+    System.out.println("Error: Array index out of bounds.");
+}
+```
+
+* **`catch (ArrayIndexOutOfBoundsException e)`**: This exception is included as an example of **array-related exceptions**. However, it’s **not used** in this code since there are no arrays being accessed. It's just there to demonstrate another type of exception that could be caught if needed.
+
+### **4. finally Block**
+
+```java
+finally {
+    scanner.close();
+}
+```
+
+* The **`finally` block** always executes, **whether an exception occurs or not**. It’s commonly used to clean up resources, like closing files or network connections.
+* Here, it **closes the scanner** to avoid a resource leak (when resources are not properly released).
+
+### **How it Works**
+
+* When you run the program, it asks for two numbers.
+* If the input can’t be converted to integers, a **`NumberFormatException`** is thrown, and an error message is shown.
+* If the user enters a zero as the second number, an **`ArithmeticException`** is thrown, and a division-by-zero message is displayed.
+* If no exception occurs, the program divides the two numbers and displays the result.
+* Finally, regardless of success or failure, the **`scanner.close()`** ensures the scanner is closed properly.
+
+### **Example Scenario 1: Valid Input**
+
+```
+Enter first number (Num1): 10
+Enter second number (Num2): 2
+Result of division: 5
+```
+
+### **Example Scenario 2: Invalid Input (Non-integer)**
+
+```
+Enter first number (Num1): abc
+Enter second number (Num2): 2
+Error: Invalid input. Please enter valid integers.
+```
+
+### **Example Scenario 3: Division by Zero**
+
+```
+Enter first number (Num1): 10
+Enter second number (Num2): 0
+Error: Cannot divide by zero.
+```
+
+### **Summary**
+
+* The code handles three types of exceptions: `NumberFormatException` (invalid input), `ArithmeticException` (division by zero), and `ArrayIndexOutOfBoundsException` (though it isn't used here).
+* It uses a **`finally` block** to ensure resources like the `Scanner` are properly closed.
+* This approach ensures the program runs smoothly even when the user provides incorrect input or if an exception occurs during execution.

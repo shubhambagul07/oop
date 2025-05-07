@@ -1,0 +1,173 @@
+This is a great implementation of the **Factory Method Design Pattern** in Java combined with the **Template Method Pattern**. Let me explain everything **clearly and line-by-line** in simple terms.
+
+---
+
+## 🔹1. `Car.java` – Abstract Base Class
+
+```java
+public abstract class Car {
+    // Common steps to build a car
+    public void buildCar() {
+        allocateAccessories();
+        assembleParts();
+        doFinalMakeup();
+    }
+
+    protected abstract void allocateAccessories();
+    protected abstract void assembleParts();
+    protected abstract void doFinalMakeup();
+}
+```
+
+### Explanation:
+
+* `Car` is an **abstract class**—it cannot be directly instantiated.
+* `buildCar()` is a **template method** that defines a fixed process to build any car.
+* Each step (`allocateAccessories`, `assembleParts`, `doFinalMakeup`) is **abstract**, meaning **subclasses must provide their own versions**.
+
+---
+
+## 🔹2. `Hatchback.java` – A Concrete Car
+
+```java
+public class Hatchback extends Car {
+    @Override
+    protected void allocateAccessories() {
+        System.out.println("Allocating accessories for Hatchback: Seats, Mirrors, Wheels");
+    }
+
+    @Override
+    protected void assembleParts() {
+        System.out.println("Assembling parts for Hatchback: Engine, Body, Frame");
+    }
+
+    @Override
+    protected void doFinalMakeup() {
+        System.out.println("Doing final makeup for Hatchback: Paint, Interior, Testing");
+    }
+}
+```
+
+### Explanation:
+
+* Implements all 3 steps **specifically for Hatchback**.
+* Called when `buildCar()` is invoked from a Hatchback instance.
+
+---
+
+## 🔹3. `Sedan.java` – Another Concrete Car
+
+```java
+public class Sedan extends Car {
+    @Override
+    protected void allocateAccessories() {
+        System.out.println("Allocating accessories for Sedan: Leather seats, Sunroof, Wheels");
+    }
+
+    @Override
+    protected void assembleParts() {
+        System.out.println("Assembling parts for Sedan: Engine, Body, Frame");
+    }
+
+    @Override
+    protected void doFinalMakeup() {
+        System.out.println("Doing final makeup for Sedan: Paint, Interior, Testing");
+    }
+}
+```
+
+* Implements Sedan-specific logic for building a car.
+
+---
+
+## 🔹4. `SUV.java` – Yet Another Car Type
+
+```java
+public class SUV extends Car {
+    @Override
+    protected void allocateAccessories() {
+        System.out.println("Allocating accessories for SUV: Leather seats, Roof racks, Alloy wheels");
+    }
+
+    @Override
+    protected void assembleParts() {
+        System.out.println("Assembling parts for SUV: Engine, Body, Frame, Off-road tires");
+    }
+
+    @Override
+    protected void doFinalMakeup() {
+        System.out.println("Doing final makeup for SUV: Paint, Interior, Testing");
+    }
+}
+```
+
+* Builds an SUV with slightly different parts (e.g., **off-road tires**).
+
+---
+
+## 🔹5. `CarFactory.java` – The Factory
+
+```java
+public class CarFactory {
+    public static Car createCar(String carType) {
+        if (carType == null) {
+            return null;
+        }
+        if (carType.equalsIgnoreCase("Hatchback")) {
+            return new Hatchback();
+        } else if (carType.equalsIgnoreCase("Sedan")) {
+            return new Sedan();
+        } else if (carType.equalsIgnoreCase("SUV")) {
+            return new SUV();
+        }
+        return null;
+    }
+}
+```
+
+### Explanation:
+
+* Static method `createCar()` is the **factory method**.
+* Takes a string input (car type), and returns the correct object.
+* Hides object creation logic from the user.
+
+---
+
+## 🔹6. `TestFactoryPattern.java` – The Driver
+
+```java
+public class TestFactoryPattern {
+    public static void main(String[] args) {
+        System.out.println("Building a Hatchback Car:");
+        Car hatchback = CarFactory.createCar("Hatchback");
+        hatchback.buildCar();
+
+        System.out.println("\nBuilding a Sedan Car:");
+        Car sedan = CarFactory.createCar("Sedan");
+        sedan.buildCar();
+
+        System.out.println("\nBuilding an SUV Car:");
+        Car suv = CarFactory.createCar("SUV");
+        suv.buildCar();
+    }
+}
+```
+
+### Explanation:
+
+* Demonstrates the whole pattern in action.
+* Creates cars using `CarFactory`.
+* Calls `buildCar()` method which uses the **template method pattern**.
+
+---
+
+## ✅ Design Patterns Used
+
+| Pattern             | Purpose                                                                          |
+| ------------------- | -------------------------------------------------------------------------------- |
+| **Factory Method**  | Creates objects (Hatchback, Sedan, SUV) without exposing instantiation logic     |
+| **Template Method** | Defines a generic car-building process (`buildCar`) with subclass-specific steps |
+
+---
+
+Would you like a visual UML diagram to understand how these classes interact?

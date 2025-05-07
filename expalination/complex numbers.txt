@@ -1,0 +1,235 @@
+Here’s a line-by-line explanation of the code for both `Complex.java` and `Main.java`:
+
+### **Complex.java** (This is the class that defines complex numbers and their operations)
+
+1. **`package complex;`**
+
+   * This line defines the package name as `complex`, meaning this class is part of the `complex` package.
+
+2. **`public class Complex {`**
+
+   * Defines the class `Complex`, which is public and can be used by other classes.
+
+3. **`private double real;`**
+
+   * Declares a variable `real` of type `double` to store the real part of the complex number.
+
+4. **`private double imag;`**
+
+   * Declares a variable `imag` of type `double` to store the imaginary part of the complex number.
+
+5. **`// Default constructor`**
+
+   * This is a comment explaining the next constructor method.
+
+6. **`public Complex() {`**
+
+   * This is the default constructor for the `Complex` class. It initializes the complex number to 0 + 0i (zero real part, zero imaginary part).
+
+7. **`this.real = 0;`**
+
+   * Sets the `real` part of the complex number to 0.
+
+8. **`this.imag = 0;`**
+
+   * Sets the `imag` part of the complex number to 0.
+
+9. **`}`**
+
+   * Closes the default constructor.
+
+10. **`// Parameterized constructor`**
+
+    * This is a comment explaining the next constructor that takes parameters.
+
+11. **`public Complex(double real, double imag) {`**
+
+    * This is a parameterized constructor that allows creating a complex number with specific real and imaginary values.
+
+12. **`this.real = real;`**
+
+    * Sets the `real` part of the complex number to the value passed as a parameter.
+
+13. **`this.imag = imag;`**
+
+    * Sets the `imag` part of the complex number to the value passed as a parameter.
+
+14. **`}`**
+
+    * Closes the parameterized constructor.
+
+15. **`// Add method`**
+
+    * A comment explaining the method that adds two complex numbers.
+
+16. **`public Complex add(Complex c) {`**
+
+    * This method adds the current complex number (`this`) to another complex number (`c`).
+
+17. **`return new Complex(this.real + c.real, this.imag + c.imag);`**
+
+    * Returns a new `Complex` object with the sum of the real parts and the sum of the imaginary parts.
+
+18. **`}`**
+
+    * Closes the `add` method.
+
+19. **`// Subtract method`**
+
+    * A comment explaining the method that subtracts two complex numbers.
+
+20. **`public Complex subtract(Complex c) {`**
+
+    * This method subtracts the complex number `c` from the current complex number.
+
+21. **`return new Complex(this.real - c.real, this.imag - c.imag);`**
+
+    * Returns a new `Complex` object with the difference of the real parts and the difference of the imaginary parts.
+
+22. **`}`**
+
+    * Closes the `subtract` method.
+
+23. **`// Multiply method`**
+
+    * A comment explaining the method that multiplies two complex numbers.
+
+24. **`public Complex multiply(Complex c) {`**
+
+    * This method multiplies the current complex number (`this`) with another complex number (`c`).
+
+25. **`double r = this.real * c.real - this.imag * c.imag;`**
+
+    * Calculates the real part of the product using the formula: (a \* c) - (b \* d), where a + bi and c + di are the two complex numbers.
+
+26. **`double i = this.real * c.imag + this.imag * c.real;`**
+
+    * Calculates the imaginary part of the product using the formula: (a \* d) + (b \* c).
+
+27. **`return new Complex(r, i);`**
+
+    * Returns a new `Complex` object with the calculated real and imaginary parts.
+
+28. **`}`**
+
+    * Closes the `multiply` method.
+
+29. **`// Display method`**
+
+    * A comment explaining the method that displays the complex number.
+
+30. **`public void display() {`**
+
+    * This method prints the complex number in the format "a + bi" or "a - bi".
+
+31. **`if (imag >= 0)`**
+
+    * If the imaginary part is greater than or equal to 0, display it as "a + bi".
+
+32. **`System.out.println(real + " + " + imag + "i");`**
+
+    * Prints the complex number in the form "a + bi".
+
+33. **`else`**
+
+    * If the imaginary part is negative, display it as "a - bi".
+
+34. **`System.out.println(real + " - " + (-imag) + "i");`**
+
+    * Prints the complex number in the form "a - bi" (the negative sign is handled by flipping the sign of the imaginary part).
+
+35. **`}`**
+
+    * Closes the `display` method.
+
+36. **`}`**
+
+    * Closes the `Complex` class.
+
+---
+
+### **Main.java** (This is the class where the main method runs to test the `Complex` class)
+
+1. **`package complex;`**
+
+   * This line defines the package name as `complex`, so it can use the `Complex` class.
+
+2. **`public class Main {`**
+
+   * Defines the `Main` class, where the program execution starts.
+
+3. **`public static void main(String[] args) {`**
+
+   * This is the entry point of the program where execution begins.
+
+4. **`Complex c1 = new Complex(4, 5);`**
+
+   * Creates a new `Complex` object `c1` with a real part of 4 and an imaginary part of 5.
+
+5. **`Complex c2 = new Complex(2, -3);`**
+
+   * Creates a new `Complex` object `c2` with a real part of 2 and an imaginary part of -3.
+
+6. **`System.out.print("First Complex Number: ");`**
+
+   * Prints a label before displaying the first complex number.
+
+7. **`c1.display();`**
+
+   * Calls the `display` method of `c1` to print its value (4 + 5i).
+
+8. **`System.out.print("Second Complex Number: ");`**
+
+   * Prints a label before displaying the second complex number.
+
+9. **`c2.display();`**
+
+   * Calls the `display` method of `c2` to print its value (2 - 3i).
+
+10. **`Complex sum = c1.add(c2);`**
+
+    * Adds `c1` and `c2` by calling the `add` method and stores the result in a new `Complex` object `sum`.
+
+11. **`System.out.print("Sum: ");`**
+
+    * Prints a label before displaying the sum of the complex numbers.
+
+12. **`sum.display();`**
+
+    * Calls the `display` method of `sum` to print the sum.
+
+13. **`Complex difference = c1.subtract(c2);`**
+
+    * Subtracts `c2` from `c1` by calling the `subtract` method and stores the result in a new `Complex` object `difference`.
+
+14. **`System.out.print("Difference: ");`**
+
+    * Prints a label before displaying the difference of the complex numbers.
+
+15. **`difference.display();`**
+
+    * Calls the `display` method of `difference` to print the difference.
+
+16. **`Complex product = c1.multiply(c2);`**
+
+    * Multiplies `c1` and `c2` by calling the `multiply` method and stores the result in a new `Complex` object `product`.
+
+17. **`System.out.print("Product: ");`**
+
+    * Prints a label before displaying the product of the complex numbers.
+
+18. **`product.display();`**
+
+    * Calls the `display` method of `product` to print the product.
+
+19. **`}`**
+
+    * Closes the `main` method.
+
+20. **`}`**
+
+    * Closes the `Main` class.
+
+---
+
+In simple terms, this program demonstrates how to work with complex numbers, allowing addition, subtraction, multiplication, and displaying the result in a human-readable format. The `Main` class tests the `Complex` class by performing operations on two complex numbers and printing the results.

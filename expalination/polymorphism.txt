@@ -1,0 +1,239 @@
+Here’s a line-by-line explanation of the code from `Publication.java`, `Book.java`, `Magazine.java`, and `Main.java`:
+
+### **Publication.java** (Base class for common publication attributes and methods)
+
+1. **`public class Publication {`**
+
+   * Declares the `Publication` class, which is the base class for all types of publications like books and magazines.
+
+2. **`protected String title;`**
+
+   * Declares a `String` variable `title` that will store the title of the publication. It's `protected`, meaning it can be accessed by classes that inherit from `Publication`.
+
+3. **`protected double price;`**
+
+   * Declares a `double` variable `price` that will store the price of the publication. It's also `protected`.
+
+4. **`protected int copies;`**
+
+   * Declares an `int` variable `copies` to store the number of copies sold or ordered for the publication. It's `protected`.
+
+5. **`public void setData(String title, double price) {`**
+
+   * This is a method that sets the `title` and `price` for the publication using the values passed as arguments.
+
+6. **`this.title = title;`**
+
+   * Sets the `title` of the publication to the `title` passed as an argument.
+
+7. **`this.price = price;`**
+
+   * Sets the `price` of the publication to the `price` passed as an argument.
+
+8. **`}`**
+
+   * Closes the `setData` method.
+
+9. **`public void saleCopy(int qty) {`**
+
+   * This method handles the sale of copies. It increases the number of copies sold and calculates the total sale amount.
+
+10. **`copies += qty;`**
+
+    * Increases the number of copies by the quantity sold (`qty`).
+
+11. **`double saleAmount = qty * price;`**
+
+    * Calculates the total sale amount by multiplying the quantity sold (`qty`) by the price of the publication (`price`).
+
+12. **`System.out.println("Sold " + qty + " copies of \"" + title + "\". Total sale: ₹" + saleAmount);`**
+
+    * Prints a message saying how many copies were sold and the total sale amount for that sale.
+
+13. **`}`**
+
+    * Closes the `saleCopy` method.
+
+14. **`public double getTotalSale() {`**
+
+    * This method returns the total sales of the publication, calculated as the number of copies sold (`copies`) multiplied by the price (`price`).
+
+15. **`return copies * price;`**
+
+    * Returns the total sale amount for the publication.
+
+16. **`}`**
+
+    * Closes the `getTotalSale` method.
+
+17. **`}`**
+
+    * Closes the `Publication` class.
+
+---
+
+### **Book.java** (Inherits from `Publication`, specific to books)
+
+1. **`public class Book extends Publication {`**
+
+   * Declares the `Book` class, which inherits from `Publication`. This means `Book` will have all the attributes and methods of `Publication`, with the ability to add its own specific functionality.
+
+2. **`private String author;`**
+
+   * Declares a `String` variable `author` to store the name of the author of the book.
+
+3. **`public void setBookDetails(String title, double price, String author) {`**
+
+   * This method sets the details of the book: its `title`, `price`, and `author`.
+
+4. **`setData(title, price);`**
+
+   * Calls the `setData` method from the `Publication` class to set the `title` and `price` of the book.
+
+5. **`this.author = author;`**
+
+   * Sets the `author` of the book to the value passed as an argument.
+
+6. **`}`**
+
+   * Closes the `setBookDetails` method.
+
+7. **`public void orderCopies(int qty) {`**
+
+   * This method orders a specific quantity of book copies by calling the `saleCopy` method (inherited from `Publication`).
+
+8. **`saleCopy(qty);`**
+
+   * Calls the `saleCopy` method from `Publication` to handle the sale of the ordered book copies.
+
+9. **`}`**
+
+   * Closes the `orderCopies` method.
+
+10. **`}`**
+
+    * Closes the `Book` class.
+
+---
+
+### **Magazine.java** (Inherits from `Publication`, specific to magazines)
+
+1. **`public class Magazine extends Publication {`**
+
+   * Declares the `Magazine` class, which inherits from `Publication`. This class will have attributes and methods related specifically to magazines.
+
+2. **`private String currentIssue;`**
+
+   * Declares a `String` variable `currentIssue` to store the current issue of the magazine (e.g., "May 2025").
+
+3. **`public void setMagazineDetails(String title, double price, String issue) {`**
+
+   * This method sets the details of the magazine: its `title`, `price`, and `currentIssue`.
+
+4. **`setData(title, price);`**
+
+   * Calls the `setData` method from the `Publication` class to set the `title` and `price` of the magazine.
+
+5. **`this.currentIssue = issue;`**
+
+   * Sets the `currentIssue` of the magazine to the value passed as an argument.
+
+6. **`}`**
+
+   * Closes the `setMagazineDetails` method.
+
+7. **`public void orderQty(int qty) {`**
+
+   * This method orders a specific quantity of magazine copies by calling the `saleCopy` method (inherited from `Publication`).
+
+8. **`saleCopy(qty);`**
+
+   * Calls the `saleCopy` method from `Publication` to handle the sale of the ordered magazine copies.
+
+9. **`}`**
+
+   * Closes the `orderQty` method.
+
+10. **`public void receiveIssue(String issue) {`**
+
+    * This method sets the magazine's `currentIssue` to a new value (e.g., receiving the next issue).
+
+11. **`this.currentIssue = issue;`**
+
+    * Sets the `currentIssue` to the new issue passed as an argument.
+
+12. **`System.out.println("Received new issue: " + currentIssue);`**
+
+    * Prints a message saying which new issue of the magazine was received.
+
+13. **`}`**
+
+    * Closes the `receiveIssue` method.
+
+14. **`}`**
+
+    * Closes the `Magazine` class.
+
+---
+
+### **Main.java** (The class that runs the program)
+
+1. **`public class Main {`**
+
+   * Declares the `Main` class, which is where the program execution starts.
+
+2. **`public static void main(String[] args) {`**
+
+   * This is the entry point of the program. The code inside this method is executed when the program runs.
+
+3. **`Book b1 = new Book();`**
+
+   * Creates a new `Book` object called `b1`.
+
+4. **`b1.setBookDetails("Java Programming", 450, "John Smith");`**
+
+   * Sets the details for `b1` by calling the `setBookDetails` method. This sets the book's title, price, and author.
+
+5. **`b1.orderCopies(10);`**
+
+   * Orders 10 copies of the book by calling the `orderCopies` method, which internally calls `saleCopy` to handle the sale.
+
+6. **`Magazine m1 = new Magazine();`**
+
+   * Creates a new `Magazine` object called `m1`.
+
+7. **`m1.setMagazineDetails("Tech Monthly", 80, "May 2025");`**
+
+   * Sets the details for `m1` by calling the `setMagazineDetails` method. This sets the magazine's title, price, and current issue.
+
+8. **`m1.orderQty(25);`**
+
+   * Orders 25 copies of the magazine by calling the `orderQty` method, which internally calls `saleCopy` to handle the sale.
+
+9. **`m1.receiveIssue("June 2025");`**
+
+   * Updates the magazine's current issue to "June 2025" by calling the `receiveIssue` method.
+
+10. **`double totalSale = b1.getTotalSale() + m1.getTotalSale();`**
+
+    * Calculates the total sale amount by adding the total sales of the book (`b1.getTotalSale()`) and the magazine (`m1.getTotalSale()`).
+
+11. **`System.out.println("Total sale of all publications: ₹" + totalSale);`**
+
+    * Prints the total sales amount of all publications.
+
+12. **`}`**
+
+    * Closes the `main` method.
+
+13. **`}`**
+
+    * Closes the `Main` class.
+
+---
+
+In summary:
+
+* `Publication.java` is a base class for common properties of publications (title, price, copies).
+* `Book.java` and `Magazine.java` extend `Publication` and add specific features for books and magazines.
+* `Main.java` demonstrates how to create and use books and magazines, handle sales, and calculate total sales.
